@@ -1,0 +1,256 @@
+{
+  "format": 1,
+  "id": "builtin-can-place",
+  "title": "Проверка размещения на поле",
+  "category": "Игры и симуляции",
+  "subgroup": "Столкновения",
+  "description": "Проверяет границы и занятые клетки, не изменяя поле. Подходит также для карт, планов и размещения объектов.",
+  "model": {
+    "id": "template_container",
+    "type": "UserContainer",
+    "x": 0,
+    "y": 0,
+    "properties": {
+      "name": "Проверка размещения на поле",
+      "subgraph": {
+        "format": 1,
+        "name": "Проверка размещения на поле",
+        "nodes": [
+          {
+            "id": "in_grid",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 70,
+            "properties": {
+              "name": "Поле",
+              "data_type": "list",
+              "data_type_source": "Python::Grid.can_place.grid"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_points",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 150,
+            "properties": {
+              "name": "Координаты",
+              "data_type": "list",
+              "data_type_source": "Python::Grid.can_place.points"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_x",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 230,
+            "properties": {
+              "name": "Столбец",
+              "data_type": "number",
+              "data_type_source": "Python::Grid.can_place.offset_x"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_y",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 310,
+            "properties": {
+              "name": "Строка",
+              "data_type": "number",
+              "data_type_source": "Python::Grid.can_place.offset_y"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_empty",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 390,
+            "properties": {
+              "name": "Пустое значение",
+              "data_type": "any",
+              "data_type_source": "Python::Grid.can_place.empty"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "check",
+            "type": "Python::Grid.can_place",
+            "x": 330,
+            "y": 190,
+            "properties": {
+              "grid": null,
+              "points": null,
+              "offset_x": 0,
+              "offset_y": 0,
+              "empty": 0,
+              "outside_blocked": true
+            },
+            "enabled_ports": [
+              "grid",
+              "points",
+              "offset_x",
+              "offset_y",
+              "empty",
+              "can_place",
+              "collisions"
+            ]
+          },
+          {
+            "id": "out_ok",
+            "type": "ContainerDataOutput",
+            "x": 760,
+            "y": 140,
+            "properties": {
+              "name": "Можно разместить",
+              "data_type": "bool",
+              "data_type_source": "Python::Grid.can_place.can_place"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "out_collisions",
+            "type": "ContainerDataOutput",
+            "x": 760,
+            "y": 290,
+            "properties": {
+              "name": "Столкновения",
+              "data_type": "list",
+              "data_type_source": "Python::Grid.can_place.collisions"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "from_node": "in_grid",
+            "from_port": "Data",
+            "to_node": "check",
+            "to_port": "grid"
+          },
+          {
+            "from_node": "in_points",
+            "from_port": "Data",
+            "to_node": "check",
+            "to_port": "points"
+          },
+          {
+            "from_node": "in_x",
+            "from_port": "Data",
+            "to_node": "check",
+            "to_port": "offset_x"
+          },
+          {
+            "from_node": "in_y",
+            "from_port": "Data",
+            "to_node": "check",
+            "to_port": "offset_y"
+          },
+          {
+            "from_node": "in_empty",
+            "from_port": "Data",
+            "to_node": "check",
+            "to_port": "empty"
+          },
+          {
+            "from_node": "check",
+            "from_port": "can_place",
+            "to_node": "out_ok",
+            "to_port": "Data"
+          },
+          {
+            "from_node": "check",
+            "from_port": "collisions",
+            "to_node": "out_collisions",
+            "to_port": "Data"
+          }
+        ],
+        "helpers": []
+      },
+      "interface": [
+        {
+          "port": "Поле",
+          "caption": "Поле",
+          "kind": "data_in",
+          "proxy_id": "in_grid",
+          "data_type": "list",
+          "data_type_source": "Python::Grid.can_place.grid"
+        },
+        {
+          "port": "Координаты",
+          "caption": "Координаты",
+          "kind": "data_in",
+          "proxy_id": "in_points",
+          "data_type": "list",
+          "data_type_source": "Python::Grid.can_place.points"
+        },
+        {
+          "port": "Столбец",
+          "caption": "Столбец",
+          "kind": "data_in",
+          "proxy_id": "in_x",
+          "data_type": "number",
+          "data_type_source": "Python::Grid.can_place.offset_x"
+        },
+        {
+          "port": "Строка",
+          "caption": "Строка",
+          "kind": "data_in",
+          "proxy_id": "in_y",
+          "data_type": "number",
+          "data_type_source": "Python::Grid.can_place.offset_y"
+        },
+        {
+          "port": "Пустое_значение",
+          "caption": "Пустое значение",
+          "kind": "data_in",
+          "proxy_id": "in_empty",
+          "data_type": "any",
+          "data_type_source": "Python::Grid.can_place.empty"
+        },
+        {
+          "port": "Можно_разместить",
+          "caption": "Можно разместить",
+          "kind": "data_out",
+          "proxy_id": "out_ok",
+          "data_type": "bool",
+          "data_type_source": "Python::Grid.can_place.can_place"
+        },
+        {
+          "port": "Столкновения",
+          "caption": "Столкновения",
+          "kind": "data_out",
+          "proxy_id": "out_collisions",
+          "data_type": "list",
+          "data_type_source": "Python::Grid.can_place.collisions"
+        }
+      ]
+    },
+    "enabled_ports": [
+      "Поле",
+      "Координаты",
+      "Столбец",
+      "Строка",
+      "Пустое_значение",
+      "Можно_разместить",
+      "Столкновения"
+    ]
+  }
+}

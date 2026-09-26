@@ -1,0 +1,195 @@
+{
+  "format": 1,
+  "id": "builtin-counter-panel",
+  "title": "Панель счётчика",
+  "category": "Интерфейс и данные",
+  "subgroup": "Готовые элементы формы",
+  "description": "Кнопки увеличения и сброса, состояние счётчика и надпись. Все части остаются обычными нодами.",
+  "model": {
+    "id": "template_container",
+    "type": "UserContainer",
+    "x": 0,
+    "y": 0,
+    "properties": {
+      "name": "Панель счётчика",
+      "subgraph": {
+        "format": 1,
+        "name": "Панель счётчика",
+        "nodes": [
+          {
+            "id": "increment",
+            "type": "Button",
+            "x": 170,
+            "y": 170,
+            "properties": {
+              "name": "increment_button",
+              "text": "+1",
+              "x": 30,
+              "y": 80,
+              "width": 100,
+              "height": 38
+            },
+            "enabled_ports": [
+              "onClick"
+            ]
+          },
+          {
+            "id": "reset",
+            "type": "Button",
+            "x": 170,
+            "y": 310,
+            "properties": {
+              "name": "reset_button",
+              "text": "Сбросить",
+              "x": 145,
+              "y": 80,
+              "width": 120,
+              "height": 38
+            },
+            "enabled_ports": [
+              "onClick"
+            ]
+          },
+          {
+            "id": "counter",
+            "type": "Counter",
+            "x": 420,
+            "y": 220,
+            "properties": {
+              "name": "counter",
+              "start": 0,
+              "step": 1
+            },
+            "enabled_ports": [
+              "doNext",
+              "doReset",
+              "onValue",
+              "Value"
+            ]
+          },
+          {
+            "id": "value_label",
+            "type": "Label",
+            "x": 680,
+            "y": 220,
+            "properties": {
+              "name": "counter_label",
+              "text": "0",
+              "x": 285,
+              "y": 80,
+              "width": 120,
+              "height": 38,
+              "align": "Center",
+              "font_size": 16,
+              "font_bold": true
+            },
+            "enabled_ports": [
+              "doSetText",
+              "Text"
+            ]
+          },
+          {
+            "id": "changed_proxy",
+            "type": "ContainerEventOutput",
+            "x": 920,
+            "y": 190,
+            "properties": {
+              "name": "Значение изменено",
+              "data_type": "any"
+            },
+            "enabled_ports": [
+              "doEvent"
+            ]
+          },
+          {
+            "id": "value_proxy",
+            "type": "ContainerDataOutput",
+            "x": 920,
+            "y": 330,
+            "properties": {
+              "name": "Значение",
+              "data_type": "number",
+              "data_type_source": "Counter.Value"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "from_node": "increment",
+            "from_port": "onClick",
+            "to_node": "counter",
+            "to_port": "doNext"
+          },
+          {
+            "from_node": "reset",
+            "from_port": "onClick",
+            "to_node": "counter",
+            "to_port": "doReset"
+          },
+          {
+            "from_node": "counter",
+            "from_port": "onValue",
+            "to_node": "value_label",
+            "to_port": "doSetText"
+          },
+          {
+            "from_node": "counter",
+            "from_port": "Value",
+            "to_node": "value_label",
+            "to_port": "Text"
+          },
+          {
+            "from_node": "counter",
+            "from_port": "onValue",
+            "to_node": "changed_proxy",
+            "to_port": "doEvent"
+          },
+          {
+            "from_node": "counter",
+            "from_port": "Value",
+            "to_node": "value_proxy",
+            "to_port": "Data"
+          }
+        ],
+        "helpers": [
+          {
+            "kind": "text",
+            "title": "Панель счётчика",
+            "text": "Кнопки создают события, Counter хранит состояние, Label показывает результат.",
+            "x": 150,
+            "y": 30,
+            "width": 650,
+            "height": 70,
+            "text_color": "#24324A",
+            "fill_color": "#EEF4FF",
+            "border_color": "#477DC2"
+          }
+        ]
+      },
+      "interface": [
+        {
+          "port": "Значение_изменено",
+          "caption": "Значение изменено",
+          "kind": "event_out",
+          "proxy_id": "changed_proxy",
+          "data_type": "any"
+        },
+        {
+          "port": "Значение",
+          "caption": "Значение",
+          "kind": "data_out",
+          "proxy_id": "value_proxy",
+          "data_type": "number",
+          "data_type_source": "Counter.Value"
+        }
+      ]
+    },
+    "enabled_ports": [
+      "Значение_изменено",
+      "Значение"
+    ]
+  }
+}

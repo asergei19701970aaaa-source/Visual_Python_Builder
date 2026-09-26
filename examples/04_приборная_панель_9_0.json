@@ -1,0 +1,619 @@
+{
+  "format": 1,
+  "name": "Приборная панель версии 9.0",
+  "nodes": [
+    {
+      "id": "form",
+      "type": "Form",
+      "x": -900,
+      "y": -300,
+      "properties": {
+        "title": "Visual Python Builder 9.0 — приборная панель",
+        "width": 1050,
+        "height": 820,
+        "visible": true,
+        "enabled": true,
+        "resizable": true,
+        "background_color": "#081018",
+        "text_color": "#F4F7FB",
+        "statusbar": "Приборы получают значения по отдельным линиям данных"
+      },
+      "enabled_ports": []
+    },
+    {
+      "id": "gauge",
+      "type": "Gauge",
+      "x": -680,
+      "y": -160,
+      "properties": {
+        "name": "gauge",
+        "title": "Круговой индикатор",
+        "minimum": 0,
+        "maximum": 100,
+        "value": 68,
+        "warning": 70.0,
+        "critical": 90.0,
+        "unit": "%",
+        "x": 20,
+        "y": 70,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "speed",
+      "type": "Speedometer",
+      "x": -480,
+      "y": -160,
+      "properties": {
+        "name": "speed",
+        "title": "Спидометр",
+        "minimum": 0,
+        "maximum": 240,
+        "value": 92,
+        "warning": 168.0,
+        "critical": 216.0,
+        "unit": "км/ч",
+        "x": 220,
+        "y": 70,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "tach",
+      "type": "Tachometer",
+      "x": -280,
+      "y": -160,
+      "properties": {
+        "name": "tach",
+        "title": "Тахометр",
+        "minimum": 0,
+        "maximum": 8000,
+        "value": 3200,
+        "warning": 5600.0,
+        "critical": 7200.0,
+        "unit": "об/мин",
+        "x": 420,
+        "y": 70,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "thermo",
+      "type": "Thermometer",
+      "x": -80,
+      "y": -160,
+      "properties": {
+        "name": "thermo",
+        "title": "Термометр",
+        "minimum": -40,
+        "maximum": 120,
+        "value": 24,
+        "warning": 84.0,
+        "critical": 108.0,
+        "unit": "°C",
+        "x": 620,
+        "y": 70,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "level",
+      "type": "LevelMeter",
+      "x": 120,
+      "y": -160,
+      "properties": {
+        "name": "level",
+        "title": "Уровень",
+        "minimum": 0,
+        "maximum": 100,
+        "value": 68,
+        "warning": 70.0,
+        "critical": 90.0,
+        "unit": "%",
+        "x": 820,
+        "y": 70,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "led",
+      "type": "LEDIndicator",
+      "x": -680,
+      "y": 80,
+      "properties": {
+        "name": "led",
+        "title": "Светодиод",
+        "minimum": 0,
+        "maximum": 100,
+        "value": 68,
+        "warning": 70.0,
+        "critical": 90.0,
+        "unit": "%",
+        "x": 20,
+        "y": 310,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "compass",
+      "type": "Compass",
+      "x": -480,
+      "y": 80,
+      "properties": {
+        "name": "compass",
+        "title": "Компас",
+        "minimum": 0,
+        "maximum": 360,
+        "value": 135,
+        "warning": 251.99999999999997,
+        "critical": 324.0,
+        "unit": "°",
+        "x": 220,
+        "y": 310,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "battery",
+      "type": "BatteryIndicator",
+      "x": -280,
+      "y": 80,
+      "properties": {
+        "name": "battery",
+        "title": "Батарея",
+        "minimum": 0,
+        "maximum": 100,
+        "value": 68,
+        "warning": 70.0,
+        "critical": 90.0,
+        "unit": "%",
+        "x": 420,
+        "y": 310,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "signal",
+      "type": "SignalIndicator",
+      "x": -80,
+      "y": 80,
+      "properties": {
+        "name": "signal",
+        "title": "Сигнал",
+        "minimum": 0,
+        "maximum": 100,
+        "value": 68,
+        "warning": 70.0,
+        "critical": 90.0,
+        "unit": "%",
+        "x": 620,
+        "y": 310,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "spark",
+      "type": "Sparkline",
+      "x": 120,
+      "y": 80,
+      "properties": {
+        "name": "spark",
+        "title": "История",
+        "minimum": 0,
+        "maximum": 100,
+        "value": 68,
+        "warning": 70.0,
+        "critical": 90.0,
+        "unit": "%",
+        "x": 820,
+        "y": 310,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "clock",
+      "type": "AnalogClock",
+      "x": -680,
+      "y": 320,
+      "properties": {
+        "name": "clock",
+        "title": "Часы",
+        "minimum": 0,
+        "maximum": 86400,
+        "value": 0,
+        "warning": 60479.99999999999,
+        "critical": 77760.0,
+        "unit": "%",
+        "x": 20,
+        "y": 550,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "knob",
+      "type": "Knob",
+      "x": -480,
+      "y": 320,
+      "properties": {
+        "name": "knob",
+        "title": "Регулятор",
+        "minimum": 0,
+        "maximum": 100,
+        "value": 40,
+        "warning": 70.0,
+        "critical": 90.0,
+        "unit": "%",
+        "x": 220,
+        "y": 550,
+        "width": 180,
+        "height": 190,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "doValue",
+        "doAddValue",
+        "onChange",
+        "onAlarm",
+        "NewValue",
+        "Sample",
+        "Value",
+        "IsAlarm"
+      ]
+    },
+    {
+      "id": "slider",
+      "type": "Slider",
+      "x": -600,
+      "y": 800,
+      "properties": {
+        "name": "slider",
+        "minimum": 0,
+        "maximum": 100,
+        "value": 68,
+        "x": 420,
+        "y": 580,
+        "width": 590,
+        "height": 34,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "onChange",
+        "Value"
+      ]
+    },
+    {
+      "id": "dial",
+      "type": "Dial",
+      "x": -350,
+      "y": 800,
+      "properties": {
+        "name": "course",
+        "minimum": 0,
+        "maximum": 360,
+        "value": 135,
+        "x": 420,
+        "y": 640,
+        "width": 100,
+        "height": 100,
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": [
+        "onChange",
+        "Value"
+      ]
+    },
+    {
+      "id": "debug_alarm",
+      "type": "DebugPrint",
+      "x": 500,
+      "y": 0,
+      "properties": {
+        "prefix": "[ALARM] Gauge: "
+      },
+      "enabled_ports": [
+        "doPrint",
+        "Data"
+      ]
+    },
+    {
+      "id": "debug_knob",
+      "type": "DebugPrint",
+      "x": 500,
+      "y": 550,
+      "properties": {
+        "prefix": "[OK] Knob: "
+      },
+      "enabled_ports": [
+        "doPrint",
+        "Data"
+      ]
+    },
+    {
+      "id": "help",
+      "type": "Label",
+      "x": 0,
+      "y": 800,
+      "properties": {
+        "name": "help",
+        "text": "Ползунок управляет семью приборами. Dial управляет компасом. Knob двигается мышью вверх/вниз.",
+        "x": 550,
+        "y": 640,
+        "width": 460,
+        "height": 80,
+        "word_wrap": true,
+        "style": "QLabel{color:#DCEEFF;background:#18293A;border-radius:8px;padding:8px;}",
+        "visible": true,
+        "enabled": true
+      },
+      "enabled_ports": []
+    }
+  ],
+  "connections": [
+    {
+      "from_node": "slider",
+      "from_port": "onChange",
+      "to_node": "gauge",
+      "to_port": "doValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "Value",
+      "to_node": "gauge",
+      "to_port": "NewValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "onChange",
+      "to_node": "thermo",
+      "to_port": "doValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "Value",
+      "to_node": "thermo",
+      "to_port": "NewValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "onChange",
+      "to_node": "level",
+      "to_port": "doValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "Value",
+      "to_node": "level",
+      "to_port": "NewValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "onChange",
+      "to_node": "led",
+      "to_port": "doValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "Value",
+      "to_node": "led",
+      "to_port": "NewValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "onChange",
+      "to_node": "battery",
+      "to_port": "doValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "Value",
+      "to_node": "battery",
+      "to_port": "NewValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "onChange",
+      "to_node": "signal",
+      "to_port": "doValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "Value",
+      "to_node": "signal",
+      "to_port": "NewValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "onChange",
+      "to_node": "spark",
+      "to_port": "doAddValue"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "Value",
+      "to_node": "spark",
+      "to_port": "Sample"
+    },
+    {
+      "from_node": "dial",
+      "from_port": "onChange",
+      "to_node": "compass",
+      "to_port": "doValue"
+    },
+    {
+      "from_node": "dial",
+      "from_port": "Value",
+      "to_node": "compass",
+      "to_port": "NewValue"
+    },
+    {
+      "from_node": "gauge",
+      "from_port": "onAlarm",
+      "to_node": "debug_alarm",
+      "to_port": "doPrint"
+    },
+    {
+      "from_node": "gauge",
+      "from_port": "IsAlarm",
+      "to_node": "debug_alarm",
+      "to_port": "Data"
+    },
+    {
+      "from_node": "knob",
+      "from_port": "onChange",
+      "to_node": "debug_knob",
+      "to_port": "doPrint"
+    },
+    {
+      "from_node": "knob",
+      "from_port": "Value",
+      "to_node": "debug_knob",
+      "to_port": "Data"
+    }
+  ]
+}

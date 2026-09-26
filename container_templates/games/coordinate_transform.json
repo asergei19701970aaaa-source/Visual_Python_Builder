@@ -1,0 +1,270 @@
+{
+  "format": 1,
+  "id": "builtin-coordinate-transform",
+  "title": "Преобразование набора координат",
+  "category": "Игры и симуляции",
+  "subgroup": "Фигуры и движение",
+  "description": "Сдвигает и поворачивает набор клеток, одновременно возвращая его размеры. Внутри только общие операции координат.",
+  "model": {
+    "id": "template_container",
+    "type": "UserContainer",
+    "x": 0,
+    "y": 0,
+    "properties": {
+      "name": "Преобразование набора координат",
+      "subgraph": {
+        "format": 1,
+        "name": "Преобразование набора координат",
+        "nodes": [
+          {
+            "id": "in_points",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 90,
+            "properties": {
+              "name": "Координаты",
+              "data_type": "list",
+              "data_type_source": "Python::Grid.transform_points.points"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_x",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 180,
+            "properties": {
+              "name": "Смещение X",
+              "data_type": "number",
+              "data_type_source": "Python::Grid.transform_points.offset_x"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_y",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 270,
+            "properties": {
+              "name": "Смещение Y",
+              "data_type": "number",
+              "data_type_source": "Python::Grid.transform_points.offset_y"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_rotation",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 360,
+            "properties": {
+              "name": "Поворот",
+              "data_type": "text",
+              "data_type_source": "Python::Grid.transform_points.rotation"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "transform",
+            "type": "Python::Grid.transform_points",
+            "x": 300,
+            "y": 190,
+            "properties": {
+              "points": null,
+              "offset_x": 0,
+              "offset_y": 0,
+              "rotation": "0",
+              "mirror_x": false,
+              "mirror_y": false
+            },
+            "enabled_ports": [
+              "points"
+            ]
+          },
+          {
+            "id": "bounds",
+            "type": "Python::Grid.point_bounds",
+            "x": 540,
+            "y": 190,
+            "properties": {
+              "points": null
+            },
+            "enabled_ports": [
+              "points",
+              "width",
+              "height"
+            ]
+          },
+          {
+            "id": "out_points",
+            "type": "ContainerDataOutput",
+            "x": 820,
+            "y": 120,
+            "properties": {
+              "name": "Результат",
+              "data_type": "list",
+              "data_type_source": "Python::Grid.transform_points.points"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "out_width",
+            "type": "ContainerDataOutput",
+            "x": 820,
+            "y": 240,
+            "properties": {
+              "name": "Ширина",
+              "data_type": "number",
+              "data_type_source": "Python::Grid.point_bounds.width"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "out_height",
+            "type": "ContainerDataOutput",
+            "x": 820,
+            "y": 340,
+            "properties": {
+              "name": "Высота",
+              "data_type": "number",
+              "data_type_source": "Python::Grid.point_bounds.height"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "from_node": "in_points",
+            "from_port": "Data",
+            "to_node": "transform",
+            "to_port": "points"
+          },
+          {
+            "from_node": "in_x",
+            "from_port": "Data",
+            "to_node": "transform",
+            "to_port": "offset_x"
+          },
+          {
+            "from_node": "in_y",
+            "from_port": "Data",
+            "to_node": "transform",
+            "to_port": "offset_y"
+          },
+          {
+            "from_node": "in_rotation",
+            "from_port": "Data",
+            "to_node": "transform",
+            "to_port": "rotation"
+          },
+          {
+            "from_node": "transform",
+            "from_port": "points",
+            "to_node": "bounds",
+            "to_port": "points"
+          },
+          {
+            "from_node": "transform",
+            "from_port": "points",
+            "to_node": "out_points",
+            "to_port": "Data"
+          },
+          {
+            "from_node": "bounds",
+            "from_port": "width",
+            "to_node": "out_width",
+            "to_port": "Data"
+          },
+          {
+            "from_node": "bounds",
+            "from_port": "height",
+            "to_node": "out_height",
+            "to_port": "Data"
+          }
+        ],
+        "helpers": []
+      },
+      "interface": [
+        {
+          "port": "Координаты",
+          "caption": "Координаты",
+          "kind": "data_in",
+          "proxy_id": "in_points",
+          "data_type": "list",
+          "data_type_source": "Python::Grid.transform_points.points"
+        },
+        {
+          "port": "Смещение_X",
+          "caption": "Смещение X",
+          "kind": "data_in",
+          "proxy_id": "in_x",
+          "data_type": "number",
+          "data_type_source": "Python::Grid.transform_points.offset_x"
+        },
+        {
+          "port": "Смещение_Y",
+          "caption": "Смещение Y",
+          "kind": "data_in",
+          "proxy_id": "in_y",
+          "data_type": "number",
+          "data_type_source": "Python::Grid.transform_points.offset_y"
+        },
+        {
+          "port": "Поворот",
+          "caption": "Поворот",
+          "kind": "data_in",
+          "proxy_id": "in_rotation",
+          "data_type": "text",
+          "data_type_source": "Python::Grid.transform_points.rotation"
+        },
+        {
+          "port": "Результат",
+          "caption": "Результат",
+          "kind": "data_out",
+          "proxy_id": "out_points",
+          "data_type": "list",
+          "data_type_source": "Python::Grid.transform_points.points"
+        },
+        {
+          "port": "Ширина",
+          "caption": "Ширина",
+          "kind": "data_out",
+          "proxy_id": "out_width",
+          "data_type": "number",
+          "data_type_source": "Python::Grid.point_bounds.width"
+        },
+        {
+          "port": "Высота",
+          "caption": "Высота",
+          "kind": "data_out",
+          "proxy_id": "out_height",
+          "data_type": "number",
+          "data_type_source": "Python::Grid.point_bounds.height"
+        }
+      ]
+    },
+    "enabled_ports": [
+      "Координаты",
+      "Смещение_X",
+      "Смещение_Y",
+      "Поворот",
+      "Результат",
+      "Ширина",
+      "Высота"
+    ]
+  }
+}

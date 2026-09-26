@@ -1,0 +1,393 @@
+{
+  "format": 1,
+  "id": "builtin-grid-batch-writer",
+  "title": "Запись набора клеток",
+  "category": "Данные и коллекции",
+  "subgroup": "Двумерные поля",
+  "description": "Записывает или очищает набор координат в любом двумерном поле и сообщает число изменённых клеток.",
+  "model": {
+    "id": "template_container",
+    "type": "UserContainer",
+    "x": 0,
+    "y": 0,
+    "properties": {
+      "name": "Запись набора клеток",
+      "subgraph": {
+        "format": 1,
+        "name": "Запись набора клеток",
+        "nodes": [
+          {
+            "id": "do_write",
+            "type": "ContainerEventInput",
+            "x": 0,
+            "y": 70,
+            "properties": {
+              "name": "Записать",
+              "data_type": "any"
+            },
+            "enabled_ports": [
+              "onEvent"
+            ]
+          },
+          {
+            "id": "do_clear",
+            "type": "ContainerEventInput",
+            "x": 0,
+            "y": 150,
+            "properties": {
+              "name": "Очистить",
+              "data_type": "any"
+            },
+            "enabled_ports": [
+              "onEvent"
+            ]
+          },
+          {
+            "id": "in_grid",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 250,
+            "properties": {
+              "name": "Поле",
+              "data_type": "list",
+              "data_type_source": "GridBatchWriter.Grid"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_points",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 330,
+            "properties": {
+              "name": "Координаты",
+              "data_type": "list",
+              "data_type_source": "GridBatchWriter.Points"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_x",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 410,
+            "properties": {
+              "name": "Столбец",
+              "data_type": "number",
+              "data_type_source": "GridBatchWriter.OffsetColumn"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_y",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 490,
+            "properties": {
+              "name": "Строка",
+              "data_type": "number",
+              "data_type_source": "GridBatchWriter.OffsetRow"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "in_value",
+            "type": "ContainerDataInput",
+            "x": 0,
+            "y": 570,
+            "properties": {
+              "name": "Значение",
+              "data_type": "any",
+              "data_type_source": "GridBatchWriter.Value"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "writer",
+            "type": "GridBatchWriter",
+            "x": 380,
+            "y": 300,
+            "properties": {
+              "empty": "0"
+            },
+            "enabled_ports": [
+              "doWrite",
+              "doClear",
+              "onDone",
+              "onError",
+              "Grid",
+              "Points",
+              "OffsetColumn",
+              "OffsetRow",
+              "Value",
+              "CurrentGrid",
+              "ChangedCells",
+              "Error"
+            ]
+          },
+          {
+            "id": "done",
+            "type": "ContainerEventOutput",
+            "x": 800,
+            "y": 140,
+            "properties": {
+              "name": "Готово",
+              "data_type": "any"
+            },
+            "enabled_ports": [
+              "doEvent"
+            ]
+          },
+          {
+            "id": "error_event",
+            "type": "ContainerEventOutput",
+            "x": 800,
+            "y": 230,
+            "properties": {
+              "name": "Ошибка",
+              "data_type": "any"
+            },
+            "enabled_ports": [
+              "doEvent"
+            ]
+          },
+          {
+            "id": "out_grid",
+            "type": "ContainerDataOutput",
+            "x": 800,
+            "y": 340,
+            "properties": {
+              "name": "Изменённое поле",
+              "data_type": "list",
+              "data_type_source": "GridBatchWriter.CurrentGrid"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "out_count",
+            "type": "ContainerDataOutput",
+            "x": 800,
+            "y": 440,
+            "properties": {
+              "name": "Изменено клеток",
+              "data_type": "number",
+              "data_type_source": "GridBatchWriter.ChangedCells"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          },
+          {
+            "id": "out_error",
+            "type": "ContainerDataOutput",
+            "x": 800,
+            "y": 540,
+            "properties": {
+              "name": "Текст ошибки",
+              "data_type": "text",
+              "data_type_source": "GridBatchWriter.Error"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "from_node": "do_write",
+            "from_port": "onEvent",
+            "to_node": "writer",
+            "to_port": "doWrite"
+          },
+          {
+            "from_node": "do_clear",
+            "from_port": "onEvent",
+            "to_node": "writer",
+            "to_port": "doClear"
+          },
+          {
+            "from_node": "in_grid",
+            "from_port": "Data",
+            "to_node": "writer",
+            "to_port": "Grid"
+          },
+          {
+            "from_node": "in_points",
+            "from_port": "Data",
+            "to_node": "writer",
+            "to_port": "Points"
+          },
+          {
+            "from_node": "in_x",
+            "from_port": "Data",
+            "to_node": "writer",
+            "to_port": "OffsetColumn"
+          },
+          {
+            "from_node": "in_y",
+            "from_port": "Data",
+            "to_node": "writer",
+            "to_port": "OffsetRow"
+          },
+          {
+            "from_node": "in_value",
+            "from_port": "Data",
+            "to_node": "writer",
+            "to_port": "Value"
+          },
+          {
+            "from_node": "writer",
+            "from_port": "onDone",
+            "to_node": "done",
+            "to_port": "doEvent"
+          },
+          {
+            "from_node": "writer",
+            "from_port": "onError",
+            "to_node": "error_event",
+            "to_port": "doEvent"
+          },
+          {
+            "from_node": "writer",
+            "from_port": "CurrentGrid",
+            "to_node": "out_grid",
+            "to_port": "Data"
+          },
+          {
+            "from_node": "writer",
+            "from_port": "ChangedCells",
+            "to_node": "out_count",
+            "to_port": "Data"
+          },
+          {
+            "from_node": "writer",
+            "from_port": "Error",
+            "to_node": "out_error",
+            "to_port": "Data"
+          }
+        ],
+        "helpers": []
+      },
+      "interface": [
+        {
+          "port": "Записать",
+          "caption": "Записать",
+          "kind": "work_in",
+          "proxy_id": "do_write",
+          "data_type": "any"
+        },
+        {
+          "port": "Очистить",
+          "caption": "Очистить",
+          "kind": "work_in",
+          "proxy_id": "do_clear",
+          "data_type": "any"
+        },
+        {
+          "port": "Поле",
+          "caption": "Поле",
+          "kind": "data_in",
+          "proxy_id": "in_grid",
+          "data_type": "list",
+          "data_type_source": "GridBatchWriter.Grid"
+        },
+        {
+          "port": "Координаты",
+          "caption": "Координаты",
+          "kind": "data_in",
+          "proxy_id": "in_points",
+          "data_type": "list",
+          "data_type_source": "GridBatchWriter.Points"
+        },
+        {
+          "port": "Столбец",
+          "caption": "Столбец",
+          "kind": "data_in",
+          "proxy_id": "in_x",
+          "data_type": "number",
+          "data_type_source": "GridBatchWriter.OffsetColumn"
+        },
+        {
+          "port": "Строка",
+          "caption": "Строка",
+          "kind": "data_in",
+          "proxy_id": "in_y",
+          "data_type": "number",
+          "data_type_source": "GridBatchWriter.OffsetRow"
+        },
+        {
+          "port": "Значение",
+          "caption": "Значение",
+          "kind": "data_in",
+          "proxy_id": "in_value",
+          "data_type": "any",
+          "data_type_source": "GridBatchWriter.Value"
+        },
+        {
+          "port": "Готово",
+          "caption": "Готово",
+          "kind": "event_out",
+          "proxy_id": "done",
+          "data_type": "any"
+        },
+        {
+          "port": "Ошибка",
+          "caption": "Ошибка",
+          "kind": "event_out",
+          "proxy_id": "error_event",
+          "data_type": "any"
+        },
+        {
+          "port": "Изменённое_поле",
+          "caption": "Изменённое поле",
+          "kind": "data_out",
+          "proxy_id": "out_grid",
+          "data_type": "list",
+          "data_type_source": "GridBatchWriter.CurrentGrid"
+        },
+        {
+          "port": "Изменено_клеток",
+          "caption": "Изменено клеток",
+          "kind": "data_out",
+          "proxy_id": "out_count",
+          "data_type": "number",
+          "data_type_source": "GridBatchWriter.ChangedCells"
+        },
+        {
+          "port": "Текст_ошибки",
+          "caption": "Текст ошибки",
+          "kind": "data_out",
+          "proxy_id": "out_error",
+          "data_type": "text",
+          "data_type_source": "GridBatchWriter.Error"
+        }
+      ]
+    },
+    "enabled_ports": [
+      "Записать",
+      "Очистить",
+      "Поле",
+      "Координаты",
+      "Столбец",
+      "Строка",
+      "Значение",
+      "Готово",
+      "Ошибка",
+      "Изменённое_поле",
+      "Изменено_клеток",
+      "Текст_ошибки"
+    ]
+  }
+}

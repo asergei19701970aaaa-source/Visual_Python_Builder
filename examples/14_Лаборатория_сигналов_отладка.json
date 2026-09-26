@@ -1,0 +1,534 @@
+{
+  "format": 1,
+  "name": "Лаборатория сигналов — демонстрация отладки",
+  "nodes": [
+    {
+      "id": "form",
+      "type": "Form",
+      "x": 0,
+      "y": 0,
+      "properties": {
+        "title": "Лаборатория сигналов — демонстрация отладки",
+        "width": 1100,
+        "height": 680,
+        "viewport_width": 1100,
+        "viewport_height": 680,
+        "scrollable": false,
+        "statusbar": "Синий: данные · оранжевый: событие · жёлтый: запрос · зелёный: ответ · красный: ошибка"
+      }
+    },
+    {
+      "id": "start",
+      "type": "Start",
+      "x": -800,
+      "y": -300,
+      "properties": {}
+    },
+    {
+      "id": "start_button",
+      "type": "Button",
+      "x": -760,
+      "y": -220,
+      "properties": {
+        "text": "Запустить цикл"
+      }
+    },
+    {
+      "id": "request",
+      "type": "Button",
+      "x": -580,
+      "y": -220,
+      "properties": {
+        "text": "Запрос / ответ"
+      }
+    },
+    {
+      "id": "error",
+      "type": "Button",
+      "x": -400,
+      "y": -220,
+      "properties": {
+        "text": "Проверить ошибку"
+      }
+    },
+    {
+      "id": "slider",
+      "type": "Slider",
+      "x": -760,
+      "y": -80,
+      "properties": {
+        "value": 35,
+        "minimum": 0,
+        "maximum": 100,
+        "step": 5,
+        "width": 260,
+        "height": 35
+      }
+    },
+    {
+      "id": "dial",
+      "type": "Dial",
+      "x": -580,
+      "y": -80,
+      "properties": {
+        "value": 25,
+        "minimum": 0,
+        "maximum": 100,
+        "step": 5,
+        "width": 80,
+        "height": 80
+      }
+    },
+    {
+      "id": "gauge",
+      "type": "Gauge",
+      "x": -400,
+      "y": -90,
+      "properties": {
+        "title": "Показание",
+        "minimum": 0,
+        "maximum": 100,
+        "value": 25,
+        "width": 170,
+        "height": 100
+      }
+    },
+    {
+      "id": "random_label",
+      "type": "Label",
+      "x": -160,
+      "y": -90,
+      "properties": {
+        "text": "Случайное число: —",
+        "width": 250,
+        "height": 28
+      }
+    },
+    {
+      "id": "loop_label",
+      "type": "Label",
+      "x": -160,
+      "y": -40,
+      "properties": {
+        "text": "Индекс цикла: —",
+        "width": 250,
+        "height": 28
+      }
+    },
+    {
+      "id": "response",
+      "type": "Label",
+      "x": -160,
+      "y": 10,
+      "properties": {
+        "text": "Ответ: —",
+        "width": 350,
+        "height": 30
+      }
+    },
+    {
+      "id": "error_label",
+      "type": "Label",
+      "x": -160,
+      "y": 60,
+      "properties": {
+        "text": "Ошибка: нет",
+        "width": 350,
+        "height": 30
+      }
+    },
+    {
+      "id": "progress",
+      "type": "ProgressBar",
+      "x": -160,
+      "y": 110,
+      "properties": {
+        "value": 0,
+        "minimum": 0,
+        "maximum": 100,
+        "width": 250,
+        "height": 25
+      }
+    },
+    {
+      "id": "sequence",
+      "type": "Sequence",
+      "x": 100,
+      "y": -250,
+      "properties": {}
+    },
+    {
+      "id": "random",
+      "type": "Random",
+      "x": 280,
+      "y": -250,
+      "properties": {
+        "minimum": 10,
+        "maximum": 90
+      }
+    },
+    {
+      "id": "rand_fmt",
+      "type": "FormatStr",
+      "x": 450,
+      "y": -250,
+      "properties": {
+        "template": "Случайное число: {0}"
+      }
+    },
+    {
+      "id": "loop",
+      "type": "ForRange",
+      "x": 100,
+      "y": -60,
+      "properties": {
+        "start": 0,
+        "stop": 10,
+        "step": 1
+      }
+    },
+    {
+      "id": "counter",
+      "type": "Counter",
+      "x": 280,
+      "y": -60,
+      "properties": {
+        "start": 0,
+        "step": 1
+      }
+    },
+    {
+      "id": "loop_fmt",
+      "type": "FormatStr",
+      "x": 450,
+      "y": -60,
+      "properties": {
+        "template": "Индекс цикла: {0}"
+      }
+    },
+    {
+      "id": "events",
+      "type": "EventHub",
+      "x": 280,
+      "y": 130,
+      "properties": {
+        "input_count": 3,
+        "output_count": 2
+      }
+    },
+    {
+      "id": "data",
+      "type": "DataHub",
+      "x": 450,
+      "y": 130,
+      "properties": {
+        "input_count": 3,
+        "output_count": 2
+      }
+    },
+    {
+      "id": "convert",
+      "type": "ConvertValue",
+      "x": 100,
+      "y": 300,
+      "properties": {
+        "target_type": "float",
+        "default": "0"
+      }
+    },
+    {
+      "id": "resp_fmt",
+      "type": "FormatStr",
+      "x": 280,
+      "y": 300,
+      "properties": {
+        "template": "Ответ преобразован: {0}"
+      }
+    },
+    {
+      "id": "bad",
+      "type": "ConvertValue",
+      "x": 450,
+      "y": 300,
+      "properties": {
+        "target_type": "float",
+        "default": "это ошибка"
+      }
+    },
+    {
+      "id": "progress_loop",
+      "type": "ProgressBar",
+      "x": -160,
+      "y": 155,
+      "properties": {
+        "value": 0,
+        "minimum": 0,
+        "maximum": 10,
+        "width": 250,
+        "height": 25
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from_node": "start",
+      "from_port": "onStart",
+      "to_node": "sequence",
+      "to_port": "doRun",
+      "signal_type": "event",
+      "breakpoint": true,
+      "probe": {
+        "enabled": true,
+        "name": "Старт",
+        "position": 0.5
+      }
+    },
+    {
+      "from_node": "sequence",
+      "from_port": "onStep1",
+      "to_node": "random",
+      "to_port": "doRandom",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "sequence",
+      "from_port": "onStep2",
+      "to_node": "request",
+      "to_port": "doClick",
+      "signal_type": "request"
+    },
+    {
+      "from_node": "sequence",
+      "from_port": "onStep3",
+      "to_node": "error",
+      "to_port": "doClick",
+      "signal_type": "error"
+    },
+    {
+      "from_node": "start_button",
+      "from_port": "onClick",
+      "to_node": "loop",
+      "to_port": "doLoop",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "random",
+      "from_port": "onResult",
+      "to_node": "rand_fmt",
+      "to_port": "doFormat",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "random",
+      "from_port": "Result",
+      "to_node": "rand_fmt",
+      "to_port": "Data1",
+      "signal_type": "data",
+      "probe": {
+        "enabled": true,
+        "name": "random.Result",
+        "position": 0.45
+      }
+    },
+    {
+      "from_node": "rand_fmt",
+      "from_port": "onResult",
+      "to_node": "random_label",
+      "to_port": "doSetText",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "rand_fmt",
+      "from_port": "Result",
+      "to_node": "random_label",
+      "to_port": "Text",
+      "signal_type": "data"
+    },
+    {
+      "from_node": "random",
+      "from_port": "onResult",
+      "to_node": "events",
+      "to_port": "doInput1",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "events",
+      "from_port": "onOutput1",
+      "to_node": "progress",
+      "to_port": "doValue",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "random",
+      "from_port": "Result",
+      "to_node": "data",
+      "to_port": "DataIn1",
+      "signal_type": "data"
+    },
+    {
+      "from_node": "data",
+      "from_port": "DataOut1",
+      "to_node": "progress",
+      "to_port": "Value",
+      "signal_type": "data"
+    },
+    {
+      "from_node": "loop",
+      "from_port": "onIteration",
+      "to_node": "counter",
+      "to_port": "doNext",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "counter",
+      "from_port": "onValue",
+      "to_node": "loop_fmt",
+      "to_port": "doFormat",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "counter",
+      "from_port": "Value",
+      "to_node": "loop_fmt",
+      "to_port": "Data1",
+      "signal_type": "data"
+    },
+    {
+      "from_node": "loop_fmt",
+      "from_port": "onResult",
+      "to_node": "loop_label",
+      "to_port": "doSetText",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "loop_fmt",
+      "from_port": "Result",
+      "to_node": "loop_label",
+      "to_port": "Text",
+      "signal_type": "data"
+    },
+    {
+      "from_node": "loop",
+      "from_port": "onIteration",
+      "to_node": "events",
+      "to_port": "doInput2",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "events",
+      "from_port": "onOutput2",
+      "to_node": "progress_loop",
+      "to_port": "doValue",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "counter",
+      "from_port": "Value",
+      "to_node": "data",
+      "to_port": "DataIn2",
+      "signal_type": "data"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "onChange",
+      "to_node": "events",
+      "to_port": "doInput3",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "Value",
+      "to_node": "data",
+      "to_port": "DataIn3",
+      "signal_type": "data",
+      "probe": {
+        "enabled": true,
+        "name": "slider.Value",
+        "position": 0.6
+      }
+    },
+    {
+      "from_node": "dial",
+      "from_port": "onChange",
+      "to_node": "gauge",
+      "to_port": "doValue",
+      "signal_type": "event"
+    },
+    {
+      "from_node": "dial",
+      "from_port": "Value",
+      "to_node": "gauge",
+      "to_port": "NewValue",
+      "signal_type": "data",
+      "probe": {
+        "enabled": true,
+        "name": "dial.Value",
+        "position": 0.55
+      }
+    },
+    {
+      "from_node": "request",
+      "from_port": "onClick",
+      "to_node": "convert",
+      "to_port": "doConvert",
+      "signal_type": "request"
+    },
+    {
+      "from_node": "slider",
+      "from_port": "Value",
+      "to_node": "convert",
+      "to_port": "Value",
+      "signal_type": "request"
+    },
+    {
+      "from_node": "convert",
+      "from_port": "onResult",
+      "to_node": "resp_fmt",
+      "to_port": "doFormat",
+      "signal_type": "response"
+    },
+    {
+      "from_node": "convert",
+      "from_port": "Result",
+      "to_node": "resp_fmt",
+      "to_port": "Data1",
+      "signal_type": "response"
+    },
+    {
+      "from_node": "resp_fmt",
+      "from_port": "onResult",
+      "to_node": "response",
+      "to_port": "doSetText",
+      "signal_type": "response"
+    },
+    {
+      "from_node": "resp_fmt",
+      "from_port": "Result",
+      "to_node": "response",
+      "to_port": "Text",
+      "signal_type": "response"
+    },
+    {
+      "from_node": "error",
+      "from_port": "onClick",
+      "to_node": "bad",
+      "to_port": "doConvert",
+      "signal_type": "error"
+    },
+    {
+      "from_node": "bad",
+      "from_port": "onError",
+      "to_node": "error_label",
+      "to_port": "doSetText",
+      "signal_type": "error"
+    },
+    {
+      "from_node": "bad",
+      "from_port": "Error",
+      "to_node": "error_label",
+      "to_port": "Text",
+      "signal_type": "error"
+    }
+  ],
+  "helpers": []
+}

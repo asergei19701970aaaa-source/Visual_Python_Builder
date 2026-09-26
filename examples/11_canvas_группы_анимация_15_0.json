@@ -1,0 +1,64 @@
+{
+  "name": "Canvas 15.0 — группы, блокировка и анимация",
+  "version": "15.0",
+  "nodes": [
+    {
+      "id": "form",
+      "type": "Form",
+      "properties": {
+        "title": "Canvas 15.0 — группы и анимация",
+        "width": 900,
+        "height": 620,
+        "enabled": true,
+        "visible": true,
+        "resizable": true,
+        "always_on_top": false,
+        "minimum_width": 240,
+        "minimum_height": 160,
+        "maximum_width": 3840,
+        "maximum_height": 2160,
+        "viewport_width": 1050,
+        "viewport_height": 650,
+        "scrollable": true,
+        "center": true,
+        "frameless": false,
+        "background_color": "#F4F8FF",
+        "text_color": "#17243A",
+        "border_color": "#477DC2",
+        "border_width": 0,
+        "border_radius": 0,
+        "opacity": 1.0,
+        "style": "",
+        "font": "Segoe UI,10,0,0,0,0",
+        "icon": "",
+        "statusbar": "Готово",
+        "tool_tip": "",
+        "accessible_name": "Главное окно"
+      },
+      "enabled_ports": []
+    },
+    {
+      "id": "canvas",
+      "type": "DashboardCanvas",
+      "properties": {
+        "name": "canvas15",
+        "scene": "[{\"id\":\"panel\",\"type\":\"rect\",\"x\":40,\"y\":40,\"w\":520,\"h\":280,\"text\":\"Панель 15.0\",\"color\":\"#173A5E\",\"rotation\":0,\"layer\":0,\"group\":\"dashboard\",\"locked\":true,\"animation\":{}},{\"id\":\"title\",\"type\":\"text\",\"x\":70,\"y\":65,\"w\":260,\"h\":40,\"text\":\"Состояние системы\",\"color\":\"#FFFFFF\",\"font_size\":18,\"rotation\":0,\"layer\":2,\"group\":\"dashboard\",\"locked\":false,\"animation\":{\"type\":\"slide\",\"duration\":1800,\"loop\":true}},{\"id\":\"ok\",\"type\":\"ellipse\",\"x\":90,\"y\":145,\"w\":90,\"h\":90,\"text\":\"\",\"color\":\"#37D67A\",\"rotation\":0,\"layer\":3,\"group\":\"status\",\"locked\":false,\"animation\":{\"type\":\"pulse\",\"duration\":1100,\"loop\":true}},{\"id\":\"needle\",\"type\":\"arrow\",\"x\":245,\"y\":185,\"w\":150,\"h\":0,\"text\":\"\",\"color\":\"#FFB020\",\"rotation\":0,\"layer\":4,\"group\":\"status\",\"locked\":false,\"animation\":{\"type\":\"rotate\",\"duration\":4000,\"loop\":true}},{\"id\":\"alarm\",\"type\":\"rect\",\"x\":420,\"y\":145,\"w\":105,\"h\":70,\"text\":\"ALARM\",\"color\":\"#E5484D\",\"rotation\":0,\"layer\":5,\"group\":\"\",\"locked\":false,\"animation\":{\"type\":\"blink\",\"duration\":800,\"loop\":true}}]",
+        "background_color": "#101820",
+        "grid_color": "#26364A",
+        "show_grid": true,
+        "grid_size": 20,
+        "zoom": 1.0,
+        "antialiasing": true,
+        "x": 20,
+        "y": 20,
+        "width": 800,
+        "height": 520,
+        "enabled": true,
+        "visible": true,
+        "tooltip": "Холст с фигурами, слоями и экспортом"
+      },
+      "enabled_ports": []
+    }
+  ],
+  "connections": []
+}

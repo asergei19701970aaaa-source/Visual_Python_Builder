@@ -1,0 +1,218 @@
+{
+  "format": 1,
+  "id": "builtin-interactive-grid",
+  "title": "Интерактивное поле клеток",
+  "category": "Игры и симуляции",
+  "subgroup": "Поля и карты",
+  "description": "Прозрачный контейнер из GridState, GridCanvas и обычных связей. Щелчок закрашивает клетку; контейнер можно открыть и изменить.",
+  "model": {
+    "id": "template_container",
+    "type": "UserContainer",
+    "x": 0,
+    "y": 0,
+    "properties": {
+      "name": "Интерактивное поле клеток",
+      "subgraph": {
+        "format": 1,
+        "name": "Интерактивное поле клеток",
+        "nodes": [
+          {
+            "id": "grid",
+            "type": "GridState",
+            "x": 250,
+            "y": 210,
+            "properties": {
+              "name": "field",
+              "columns": 10,
+              "rows": 20,
+              "empty": "0"
+            },
+            "enabled_ports": [
+              "doSetCell",
+              "doClear",
+              "onChange",
+              "Column",
+              "Row",
+              "Value",
+              "Grid"
+            ]
+          },
+          {
+            "id": "canvas",
+            "type": "GridCanvas",
+            "x": 520,
+            "y": 200,
+            "properties": {
+              "name": "field_view",
+              "columns": 10,
+              "rows": 20,
+              "palette": "{\"1\":\"#35C2FF\"}",
+              "x": 40,
+              "y": 40,
+              "width": 300,
+              "height": 540
+            },
+            "enabled_ports": [
+              "doSetGrid",
+              "onCellClick",
+              "Grid",
+              "Column",
+              "Row"
+            ]
+          },
+          {
+            "id": "one",
+            "type": "Python::Math.number",
+            "x": 260,
+            "y": 470,
+            "properties": {
+              "value": 1
+            },
+            "enabled_ports": [
+              "out"
+            ]
+          },
+          {
+            "id": "clear_proxy",
+            "type": "ContainerEventInput",
+            "x": 0,
+            "y": 210,
+            "properties": {
+              "name": "Очистить",
+              "data_type": "any"
+            },
+            "enabled_ports": [
+              "onEvent"
+            ]
+          },
+          {
+            "id": "changed_proxy",
+            "type": "ContainerEventOutput",
+            "x": 820,
+            "y": 210,
+            "properties": {
+              "name": "Изменено",
+              "data_type": "any"
+            },
+            "enabled_ports": [
+              "doEvent"
+            ]
+          },
+          {
+            "id": "grid_proxy",
+            "type": "ContainerDataOutput",
+            "x": 820,
+            "y": 340,
+            "properties": {
+              "name": "Поле",
+              "data_type": "list",
+              "data_type_source": "GridState.Grid"
+            },
+            "enabled_ports": [
+              "Data"
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "from_node": "clear_proxy",
+            "from_port": "onEvent",
+            "to_node": "grid",
+            "to_port": "doClear"
+          },
+          {
+            "from_node": "canvas",
+            "from_port": "onCellClick",
+            "to_node": "grid",
+            "to_port": "doSetCell"
+          },
+          {
+            "from_node": "canvas",
+            "from_port": "Column",
+            "to_node": "grid",
+            "to_port": "Column"
+          },
+          {
+            "from_node": "canvas",
+            "from_port": "Row",
+            "to_node": "grid",
+            "to_port": "Row"
+          },
+          {
+            "from_node": "one",
+            "from_port": "out",
+            "to_node": "grid",
+            "to_port": "Value"
+          },
+          {
+            "from_node": "grid",
+            "from_port": "onChange",
+            "to_node": "canvas",
+            "to_port": "doSetGrid"
+          },
+          {
+            "from_node": "grid",
+            "from_port": "Grid",
+            "to_node": "canvas",
+            "to_port": "Grid"
+          },
+          {
+            "from_node": "grid",
+            "from_port": "onChange",
+            "to_node": "changed_proxy",
+            "to_port": "doEvent"
+          },
+          {
+            "from_node": "grid",
+            "from_port": "Grid",
+            "to_node": "grid_proxy",
+            "to_port": "Data"
+          }
+        ],
+        "helpers": [
+          {
+            "kind": "text",
+            "title": "Как устроено",
+            "text": "GridState хранит данные. GridCanvas только показывает их. Щелчок возвращает координаты обычными точками.",
+            "x": 220,
+            "y": 40,
+            "width": 520,
+            "height": 80,
+            "text_color": "#EAF4FF",
+            "fill_color": "#18334A",
+            "border_color": "#35C2FF"
+          }
+        ]
+      },
+      "interface": [
+        {
+          "port": "Очистить",
+          "caption": "Очистить",
+          "kind": "work_in",
+          "proxy_id": "clear_proxy",
+          "data_type": "any"
+        },
+        {
+          "port": "Изменено",
+          "caption": "Изменено",
+          "kind": "event_out",
+          "proxy_id": "changed_proxy",
+          "data_type": "any"
+        },
+        {
+          "port": "Поле",
+          "caption": "Поле",
+          "kind": "data_out",
+          "proxy_id": "grid_proxy",
+          "data_type": "list",
+          "data_type_source": "GridState.Grid"
+        }
+      ]
+    },
+    "enabled_ports": [
+      "Очистить",
+      "Изменено",
+      "Поле"
+    ]
+  }
+}

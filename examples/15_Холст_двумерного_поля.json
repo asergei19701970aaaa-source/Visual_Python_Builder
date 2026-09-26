@@ -1,0 +1,95 @@
+{
+  "format": 1,
+  "name": "Холст двумерного поля",
+  "nodes": [
+    {
+      "id": "form",
+      "type": "Form",
+      "x": 40,
+      "y": 40,
+      "properties": {
+        "title": "Редактор клеток — только общие ноды",
+        "width": 620,
+        "height": 660,
+        "viewport_width": 620,
+        "viewport_height": 660,
+        "scrollable": false,
+        "background_color": "#0B1020",
+        "visible": true
+      },
+      "enabled_ports": ["onCreate"]
+    },
+    {
+      "id": "grid",
+      "type": "GridState",
+      "x": 360,
+      "y": 260,
+      "properties": {
+        "name": "field",
+        "columns": 10,
+        "rows": 20,
+        "empty": "0"
+      },
+      "enabled_ports": ["doSetCell", "doClear", "onChange", "Column", "Row", "Value", "Grid"]
+    },
+    {
+      "id": "canvas",
+      "type": "GridCanvas",
+      "x": 690,
+      "y": 250,
+      "properties": {
+        "name": "field_view",
+        "columns": 10,
+        "rows": 20,
+        "fit_to_widget": true,
+        "show_grid": true,
+        "show_values": false,
+        "interactive": true,
+        "empty_value": "0",
+        "palette": "{\"1\":\"#35C2FF\"}",
+        "background_color": "#101820",
+        "grid_color": "#26364A",
+        "x": 32,
+        "y": 62,
+        "width": 360,
+        "height": 560,
+        "visible": true
+      },
+      "enabled_ports": ["doSetGrid", "onCellClick", "Grid", "Column", "Row"]
+    },
+    {
+      "id": "one",
+      "type": "Python::Math.number",
+      "x": 370,
+      "y": 510,
+      "properties": {"value": 1},
+      "enabled_ports": ["out"]
+    },
+    {
+      "id": "hint",
+      "type": "Label",
+      "x": 690,
+      "y": 80,
+      "properties": {
+        "name": "hint",
+        "text": "Щёлкайте по клеткам — состояние меняется и сразу перерисовывается",
+        "x": 32,
+        "y": 20,
+        "width": 540,
+        "height": 30,
+        "text_color": "#F4F7FB",
+        "visible": true
+      },
+      "enabled_ports": []
+    }
+  ],
+  "connections": [
+    {"from_node": "form", "from_port": "onCreate", "to_node": "grid", "to_port": "doClear", "signal_type": "event"},
+    {"from_node": "grid", "from_port": "onChange", "to_node": "canvas", "to_port": "doSetGrid", "signal_type": "event"},
+    {"from_node": "grid", "from_port": "Grid", "to_node": "canvas", "to_port": "Grid", "signal_type": "data"},
+    {"from_node": "canvas", "from_port": "onCellClick", "to_node": "grid", "to_port": "doSetCell", "signal_type": "event"},
+    {"from_node": "canvas", "from_port": "Column", "to_node": "grid", "to_port": "Column", "signal_type": "data"},
+    {"from_node": "canvas", "from_port": "Row", "to_node": "grid", "to_port": "Row", "signal_type": "data"},
+    {"from_node": "one", "from_port": "out", "to_node": "grid", "to_port": "Value", "signal_type": "data"}
+  ]
+}
