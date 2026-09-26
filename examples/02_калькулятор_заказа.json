@@ -1,0 +1,26 @@
+{
+  "format": 1,
+  "name": "Калькулятор заказа",
+  "nodes": [
+    {"id":"form","type":"Form","x":0,"y":0,"properties":{"title":"Калькулятор заказа","width":720,"height":420,"visible":true},"enabled_ports":[]},
+    {"id":"start","type":"Start","x":-560,"y":-150,"properties":{},"enabled_ports":["onStart"]},
+    {"id":"price_label","type":"Label","x":-420,"y":-100,"properties":{"name":"price_label","text":"Цена товара"},"enabled_ports":["doSetText","Text"]},
+    {"id":"price","type":"LineEdit","x":-220,"y":-100,"properties":{"name":"price","placeholder":"Например, 1250","text":"1250"},"enabled_ports":["onChange","Text"]},
+    {"id":"quantity_label","type":"Label","x":-420,"y":-20,"properties":{"name":"quantity_label","text":"Количество"},"enabled_ports":["doSetText","Text"]},
+    {"id":"quantity","type":"LineEdit","x":-220,"y":-20,"properties":{"name":"quantity","placeholder":"Например, 3","text":"3"},"enabled_ports":["onChange","Text"]},
+    {"id":"calculate","type":"Button","x":40,"y":-60,"properties":{"name":"calculate","text":"Посчитать заказ"},"enabled_ports":["onClick"]},
+    {"id":"multiply","type":"Math","x":260,"y":-60,"properties":{"operator":"*","op1":0,"op2":0},"enabled_ports":["doOperation","Op1","Op2","Result","onResult"]},
+    {"id":"message","type":"FormatStr","x":480,"y":-60,"properties":{"template":"Итого к оплате: {0} руб."},"enabled_ports":["doFormat","Data1","Result","onResult"]},
+    {"id":"total","type":"Label","x":700,"y":-60,"properties":{"name":"total","text":"Итого появится здесь","width":300},"enabled_ports":["doSetText","Text"]},
+    {"id":"notice","type":"Label","x":40,"y":80,"properties":{"name":"notice","text":"Введите цену и количество, затем нажмите кнопку.","width":420},"enabled_ports":[]}
+  ],
+  "connections": [
+    {"from_node":"calculate","from_port":"onClick","to_node":"multiply","to_port":"doOperation"},
+    {"from_node":"price","from_port":"Text","to_node":"multiply","to_port":"Op1"},
+    {"from_node":"quantity","from_port":"Text","to_node":"multiply","to_port":"Op2"},
+    {"from_node":"multiply","from_port":"onResult","to_node":"message","to_port":"doFormat"},
+    {"from_node":"multiply","from_port":"Result","to_node":"message","to_port":"Data1"},
+    {"from_node":"message","from_port":"onResult","to_node":"total","to_port":"doSetText"},
+    {"from_node":"message","from_port":"Result","to_node":"total","to_port":"Text"}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "format": 1,
+  "name": "Список покупок",
+  "nodes": [
+    {"id":"form","type":"Form","x":0,"y":0,"properties":{"title":"Список покупок","width":760,"height":520,"visible":true},"enabled_ports":[]},
+    {"id":"start","type":"Start","x":-540,"y":-160,"properties":{},"enabled_ports":["onStart"]},
+    {"id":"hint","type":"Label","x":-360,"y":-140,"properties":{"name":"hint","text":"Добавьте товары. Выбранный товар можно удалить из списка.","width":500},"enabled_ports":[]},
+    {"id":"item","type":"LineEdit","x":-360,"y":-70,"properties":{"name":"item","placeholder":"Название товара"},"enabled_ports":["Text","onReturn"]},
+    {"id":"add","type":"Button","x":-80,"y":-70,"properties":{"name":"add","text":"Добавить"},"enabled_ports":["onClick"]},
+    {"id":"list","type":"ListWidget","x":160,"y":-100,"properties":{"name":"list","items":"Хлеб|Молоко","width":300,"height":250},"enabled_ports":["doAdd","Item","onSelect","Text"]},
+    {"id":"selected","type":"Label","x":-360,"y":30,"properties":{"name":"selected","text":"Выберите товар в списке.","width":450},"enabled_ports":["doSetText","Text"]},
+    {"id":"selected_message","type":"FormatStr","x":-80,"y":30,"properties":{"template":"Вы выбрали: {0}"},"enabled_ports":["doFormat","Data1","Result","onResult"]},
+    {"id":"clear","type":"Button","x":-360,"y":130,"properties":{"name":"clear","text":"Очистить список"},"enabled_ports":["onClick"]},
+    {"id":"confirm","type":"Label","x":-80,"y":130,"properties":{"name":"confirm","text":""},"enabled_ports":["doSetText","Text"]}
+  ],
+  "connections": [
+    {"from_node":"add","from_port":"onClick","to_node":"list","to_port":"doAdd"},
+    {"from_node":"item","from_port":"Text","to_node":"list","to_port":"Item"},
+    {"from_node":"item","from_port":"onReturn","to_node":"list","to_port":"doAdd"},
+    {"from_node":"list","from_port":"onSelect","to_node":"selected_message","to_port":"doFormat"},
+    {"from_node":"list","from_port":"Text","to_node":"selected_message","to_port":"Data1"},
+    {"from_node":"selected_message","from_port":"onResult","to_node":"selected","to_port":"doSetText"},
+    {"from_node":"selected_message","from_port":"Result","to_node":"selected","to_port":"Text"}
+  ]
+}

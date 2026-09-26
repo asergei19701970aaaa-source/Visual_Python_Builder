@@ -1,0 +1,29 @@
+{
+  "format": 1,
+  "name": "Таймер фокуса",
+  "nodes": [
+    {"id":"form","type":"Form","x":0,"y":0,"properties":{"title":"Таймер фокуса","width":640,"height":420,"visible":true},"enabled_ports":[]},
+    {"id":"start","type":"Start","x":-540,"y":-120,"properties":{},"enabled_ports":["onStart"]},
+    {"id":"minutes_label","type":"Label","x":-370,"y":-100,"properties":{"name":"minutes_label","text":"Минут на задачу"},"enabled_ports":[]},
+    {"id":"minutes","type":"SpinBox","x":-170,"y":-100,"properties":{"name":"minutes","value":25,"minimum":1,"maximum":120},"enabled_ports":["Value","onChange"]},
+    {"id":"begin","type":"Button","x":40,"y":-100,"properties":{"name":"begin","text":"Начать фокус"},"enabled_ports":["onClick"]},
+    {"id":"timer","type":"Timer","x":250,"y":-100,"properties":{"name":"timer","interval":1000,"active":false},"enabled_ports":["doStart","doStop","onTimer"]},
+    {"id":"counter","type":"Memory","x":-170,"y":20,"properties":{"name":"counter","default":"0"},"enabled_ports":["doValue","Data","Value","onData"]},
+    {"id":"tick_math","type":"Math","x":40,"y":20,"properties":{"operator":"+","op1":0,"op2":1},"enabled_ports":["doOperation","Op1","Result","onResult"]},
+    {"id":"status_text","type":"FormatStr","x":250,"y":20,"properties":{"template":"Прошло секунд: {0}"},"enabled_ports":["doFormat","Data1","Result","onResult"]},
+    {"id":"status","type":"Label","x":470,"y":20,"properties":{"name":"status","text":"Таймер ещё не запущен","width":260},"enabled_ports":["doSetText","Text"]},
+    {"id":"stop","type":"Button","x":40,"y":120,"properties":{"name":"stop","text":"Остановить"},"enabled_ports":["onClick"]}
+  ],
+  "connections": [
+    {"from_node":"begin","from_port":"onClick","to_node":"timer","to_port":"doStart"},
+    {"from_node":"timer","from_port":"onTimer","to_node":"tick_math","to_port":"doOperation"},
+    {"from_node":"counter","from_port":"Value","to_node":"tick_math","to_port":"Op1"},
+    {"from_node":"tick_math","from_port":"onResult","to_node":"counter","to_port":"doValue"},
+    {"from_node":"tick_math","from_port":"Result","to_node":"counter","to_port":"Data"},
+    {"from_node":"tick_math","from_port":"onResult","to_node":"status_text","to_port":"doFormat"},
+    {"from_node":"tick_math","from_port":"Result","to_node":"status_text","to_port":"Data1"},
+    {"from_node":"status_text","from_port":"onResult","to_node":"status","to_port":"doSetText"},
+    {"from_node":"status_text","from_port":"Result","to_node":"status","to_port":"Text"},
+    {"from_node":"stop","from_port":"onClick","to_node":"timer","to_port":"doStop"}
+  ]
+}
