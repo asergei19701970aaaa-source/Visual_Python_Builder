@@ -14,6 +14,11 @@ KIND_NAMES = {
     "data_in": "место для значения",
     "data_out": "готовое значение для следующего шага",
 }
+DATA_TYPE_NAMES = {
+    "any": "любые данные", "text": "текст", "number": "число",
+    "bool": "да / нет", "list": "список", "dict": "словарь",
+    "color": "цвет", "file": "файл или путь",
+}
 
 
 def component_search_text(spec: ComponentSpec) -> str:
@@ -105,9 +110,11 @@ def format_component_help(type_name: str) -> str:
     if not ports:
         lines.append("У этого элемента нет точек соединения. Настройте его свойства и используйте его как самостоятельную часть формы.")
     for port in ports:
+        data_type = DATA_TYPE_NAMES.get(port.data_type, port.data_type)
         lines.extend((
             "",
             f"{port.caption} ({port.name})",
+            f"Тип: {data_type}.",
             point_help(type_name, port.name, port.caption, port.kind, port.description),
         ))
     lines.extend(("", "СВОЙСТВА"))
