@@ -4,7 +4,8 @@ from __future__ import annotations
 from typing import Any
 
 from components import COMPONENTS, ComponentSpec, effective_ports
-from practical_help import component_help, render_help
+from point_help import point_help
+from practical_help import component_help, property_help, render_help
 
 
 KIND_NAMES = {
@@ -37,7 +38,7 @@ def component_search_text(spec: ComponentSpec) -> str:
 def node_instance_search_text(model: dict[str, Any]) -> str:
     """Search index for one installed element, including changed settings."""
     spec = COMPONENTS.get(str(model.get("type", "")))
-    values: list[Any] = (str(model.get("id", "")), str(model.get("type", "")))
+    values: list[Any] = [str(model.get("id", "")), str(model.get("type", ""))]
     if spec is not None:
         values.append(component_search_text(spec))
     properties = model.get("properties", {})
@@ -87,10 +88,39 @@ def project_node_records(
 
 
 def format_component_help(type_name: str) -> str:
-    """Full help shown by the editor for a selected palette element."""
+    """Full practical help for an element, its points and its settings."""
     if type_name not in COMPONENTS:
         return "Элемент не найден в каталоге."
-    return render_help(component_help(type_name), show_advanced=True)
+    spec = COMPONENTS[type_name]
+    lines = [
+        spec.caption,
+        "=" * len(spec.caption),
+        "",
+        "КАК ЧИТАТЬ НОДУ",
+        render_help(component_help(type_name), show_advanced=True),
+        "",
+        "ТОЧКИ ПОДКЛЮЧЕНИЯ",
+    ]
+    ports = effective_ports(type_name)
+    if not ports:
+        lines.append("У этого элемента нет точек соединения. Настройте его свойства и используйте его как самостоятельную часть формы.")
+    for port in ports:
+        lines.extend((
+            "",
+            f"{port.caption} ({port.name})",
+            point_help(type_name, port.name, port.caption, port.kind, port.description),
+        ))
+    lines.extend(("", "СВОЙСТВА"))
+    if not spec.properties:
+        lines.append("Постоянных настроек нет.")
+    for prop in spec.properties:
+        entry = property_help(type_name, prop.name)
+        lines.extend(("", f"{prop.caption} ({prop.name})", render_help(entry, show_advanced=True)))
+    lines.extend((
+        "", "ПРОВЕРКА",
+        "Запустите проект после изменения. Проверьте ровно тот видимый результат, ради которого добавлен элемент. Если результат не изменился, проследите линию от действия до следующего шага и откройте справку у точки соединения.",
+    ))
+    return "\n".join(lines)
 
 
 BEGINNER_GUIDE = """КАК СОБРАТЬ ПЕРВУЮ ПРОГРАММУ
